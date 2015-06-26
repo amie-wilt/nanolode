@@ -8,3 +8,15 @@
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
 # Environment variables (ENV['...']) can be set in the file .env file.
+
+require 'faker'
+
+42.times do
+  Product.create!({
+    :name => Faker::Commerce.product_name,
+    :description => Faker::Hacker.say_something_smart,
+    :price => Faker::Commerce.price,
+    :sku => Faker::Code.ean,
+    :remote_image_url => 'http://loremflickr.com/640/480/product'
+  })
+end
