@@ -1,0 +1,51 @@
+table.table
+  thead
+    tr
+      th Product
+      th Price Each
+      th
+      th Quantity
+
+      th
+      th Total
+      th
+  tbody
+    - @cart.line_items.each do |line|
+      tr
+        td = line.product.name
+        td $#{line.product.price}
+        td
+          - if line.quantity > 1
+            = form_tag cart_path, method: 'patch'
+              = hidden_field_tag :product_id, line.product_id
+              = hidden_field_tag :quantity, line.quantity - 1
+              button.btn.btn-warning type="submit"
+                i.glyphicon.glyphicon-minus
+        td &times; #{line.quantity}
+        td
+          = form_tag cart_path, method: 'patch'
+            = hidden_field_tag :product_id, line.product_id
+            = hidden_field_tag :quantity, line.quantity + 1
+            button.btn.btn-success type="submit"
+              i.glyphicon.glyphicon-plus
+
+        td $#{line.subtotal}
+        td
+          = form_tag cart_path, method: 'patch'
+            = hidden_field_tag :product_id, line.product_id
+            = hidden_field_tag :quantity, 0
+            button.btn.btn-danger type="submit"
+              i.glyphicon.glyphicon-trash
+
+  tfoot
+    tr
+      td
+      td
+      td
+      td
+      td
+      td $#{@cart.total}
+      td
+
+
+button.btn.pull-right TODO: Checkout Button Here.

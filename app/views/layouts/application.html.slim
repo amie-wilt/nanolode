@@ -12,5 +12,8 @@ html
     header
       == render 'layouts/navigation'
     main[role="main"]
-      == render 'layouts/messages'
-      == yield
+      .container
+        .page-header
+          h1 nanoLODE <small><em>for the discerning shopper</em></small>
+        == render 'layouts/messages'
+        == yield

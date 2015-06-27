@@ -1,17 +1,14 @@
-.container
-  .page-header
-    h1 Products
-    
-  - @products.in_groups_of(3) do |products|
-    .row
-    - products.each do |product|
-      .col-lg-4
-        .well
-          a.thumbnail href="#"
-            img.img-responsive src=product.image.thumb.url
-          h4 = product.name
-          button.btn.btn-primary.pull-right = "$#{product.price}"
-          p = product.description
+- @products.in_groups_of(3) do |products|
+  .row
+  - products.each do |product|
+    .col-lg-4
+      .well
+        img.img-responsive.thumbnail src=product.image.thumb.url
+        h4 = product.name
+        = form_tag cart_path, method: 'patch'
+          = hidden_field_tag :product_id, product.id
+          button.btn.btn-primary.pull-right type="submit" = "$#{product.price}"
+        p = product.description
 
-  .text-center
-    = paginate(@products)
+.text-center
+  = paginate(@products)

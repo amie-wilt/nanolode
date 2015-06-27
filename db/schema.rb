@@ -11,25 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626201259) do
+ActiveRecord::Schema.define(version: 20150627052234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
   create_table "carts", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.integer  "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "total",      default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "line_items", force: :cascade do |t|
     t.uuid     "cart_id"
     t.integer  "product_id"
-    t.integer  "quantity"
-    t.integer  "subtotal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "quantity",   default: 0, null: false
+    t.integer  "subtotal",   default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
@@ -39,11 +39,11 @@ ActiveRecord::Schema.define(version: 20150626201259) do
     t.string   "name"
     t.text     "description"
     t.string   "permalink"
-    t.integer  "price"
+    t.integer  "price",       default: 0, null: false
     t.string   "image"
     t.string   "sku"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade do |t|
