@@ -1,2 +1,22 @@
-h1 Carts#receipt
-p Find me in app/views/carts/receipt.html.slim
+h3 Thank you for your order!
+
+table.table
+  thead
+    tr
+      th Product
+      th Price Each
+      th Quantity
+      th Total
+  tbody
+    - @cart.line_items.each do |line|
+      tr
+        td = line.product.name
+        td $#{line.product.price}
+        td &times; #{line.quantity}
+        td $#{line.subtotal}
+  tfoot
+    tr
+      td
+      td
+      td
+      td $#{@cart.total}
