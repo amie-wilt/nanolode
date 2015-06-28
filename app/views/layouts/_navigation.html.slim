@@ -13,6 +13,6 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       ul.nav.navbar-nav.navbar-right
         - if current_cart
           li
-            p.navbar-text #{current_cart.size} items ($#{current_cart.total})
+            p.navbar-text #{current_cart.size} items (#{format_money current_cart.total})
           li = link_to cart_path do
             i.glyphicon.glyphicon-shopping-cart

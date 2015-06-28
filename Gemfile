@@ -19,8 +19,9 @@ gem 'upmin-admin'
 
 gem 'carrierwave'
 gem 'carrierwave-aws'
-gem 'faker', :require => false
+gem 'faker', require: false
 gem 'mini_magick'
+gem 'payola-payments'
 
 group :development do
   gem 'better_errors'
@@ -28,12 +29,12 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
-  gem 'hub', :require => nil
+  gem 'hub', require: nil
   gem 'quiet_assets'
   gem 'rails_layout'
-  gem 'rb-fchange', :require => false
-  gem 'rb-fsevent', :require => false
-  gem 'rb-inotify', :require => false
+  gem 'rb-fchange', require: false
+  gem 'rb-fsevent', require: false
+  gem 'rb-inotify', require: false
   gem 'spring-commands-rspec'
 end
 

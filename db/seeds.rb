@@ -12,11 +12,10 @@ puts 'CREATED ADMIN USER: ' << user.email
 require 'faker'
 
 42.times do
-  Product.create!({
-    :name => Faker::Commerce.product_name,
-    :description => Faker::Hacker.say_something_smart,
-    :price => Faker::Commerce.price,
-    :sku => Faker::Code.ean,
-    :remote_image_url => 'http://loremflickr.com/640/480/product'
-  })
+  product_name = Faker::Commerce.product_name
+  Product.create!(name: product_name,
+                  description: Faker::Hacker.say_something_smart,
+                  price: (Faker::Commerce.price.to_f * 100).to_i,
+                  sku: Faker::Code.ean,
+                  remote_image_url: "http://loremflickr.com/640/480/#{product_name.split.last.downcase}") # Find somewhat relevant images, lol.
 end

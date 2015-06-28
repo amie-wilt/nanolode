@@ -24,11 +24,15 @@ class CartsController < ApplicationController
   end
 
   def receipt
+    session[:cart_id] = nil
+    @cart = Cart.find_by(permalink: params[:id])
+    redirect_to(root_path) unless @cart
+    @sale = Payola::Sale.find_by(product_id: @cart.id)
   end
 
   private
 
   def current_cart
-    @current_cart ||= (super || Cart.create.tap { |c| session[:cart_id] = c.id })
+    @current_cart ||= (super || Cart.create!.tap { |c| session[:cart_id] = c.id })
   end
 end

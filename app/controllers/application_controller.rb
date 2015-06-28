@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     @current_cart ||= Cart.find(session[:cart_id]) if session[:cart_id]
+  rescue ActiveRecord::RecordNotFound
+    session[:card_id] = nil
+    return nil
   end
   helper_method :current_cart
 

@@ -1,22 +1,36 @@
-h3 Thank you for your order!
+h4 Thank you for your order!
 
-table.table
-  thead
-    tr
-      th Product
-      th Price Each
-      th Quantity
-      th Total
-  tbody
-    - @cart.line_items.each do |line|
-      tr
-        td = line.product.name
-        td $#{line.product.price}
-        td &times; #{line.quantity}
-        td $#{line.subtotal}
-  tfoot
-    tr
-      td
-      td
-      td
-      td $#{@cart.total}
+.row
+  .col-lg-3.col-md-4
+    table.table
+      tbody
+        tr
+          th Customer
+          td = @sale.email
+        tr
+          th Payment
+          td= "Your #{@sale.card_type} ending in #{@sale.card_last4}."
+
+  .col-lg-9.col-md-8
+    table.table
+      thead
+        tr
+          th Product
+          th Price Each
+          th Quantity
+          th Total
+      tbody
+        - @cart.line_items.each do |line|
+          tr
+            td = line.product.name
+            td = format_money line.product.price
+            td &times; #{line.quantity}
+            td = format_money line.subtotal
+      tfoot
+        tr
+          td
+          td
+          td
+          td = format_money @cart.total
+
+- # debug @sale

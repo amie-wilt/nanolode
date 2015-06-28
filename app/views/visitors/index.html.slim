@@ -2,13 +2,14 @@
   .row
   - products.each do |product|
     .col-lg-4
-      .well
-        img.img-responsive.thumbnail src=product.image.thumb.url
-        h4 = product.name
-        = form_tag cart_path, method: 'patch'
-          = hidden_field_tag :product_id, product.id
-          button.btn.btn-primary.pull-right type="submit" = "$#{product.price}"
-        p = product.description
+      - if product
+        .well
+          img.img-responsive.thumbnail src=product.image.thumb.url
+          h4 = product.name
+          = form_tag cart_path, method: 'patch'
+            = hidden_field_tag :product_id, product.id
+            button.btn.btn-primary.pull-right type="submit" = format_money product.price
+          p = product.description
 
 .text-center
   = paginate(@products)

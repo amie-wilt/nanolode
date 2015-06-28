@@ -13,7 +13,7 @@ table.table
     - @cart.line_items.each do |line|
       tr
         td = line.product.name
-        td $#{line.product.price}
+        td = format_money line.product.price
         td
           - if line.quantity > 1
             = form_tag cart_path, method: 'patch'
@@ -29,7 +29,7 @@ table.table
             button.btn.btn-success type="submit"
               i.glyphicon.glyphicon-plus
 
-        td $#{line.subtotal}
+        td = format_money line.subtotal
         td
           = form_tag cart_path, method: 'patch'
             = hidden_field_tag :product_id, line.product_id
@@ -44,8 +44,12 @@ table.table
       td
       td
       td
-      td $#{@cart.total}
+      td = format_money @cart.total
       td
 
-
-button.btn.pull-right TODO: Checkout Button Here.
+.pull-right
+  = render 'payola/transactions/checkout',
+      sellable: current_cart,
+      button_text: 'Checkout',
+      product_image_path: current_cart.products.first.image.thumb.url,
+      description: current_cart.description
